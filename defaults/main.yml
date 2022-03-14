@@ -15,5 +15,6 @@ services:
     trusted: 212.227.140.227
   - name: testzwei
     port: 304
-    protocols: tcp
-    trusted: 212.227.140.227
+    protocols:
+      - tcp
+    trusted:

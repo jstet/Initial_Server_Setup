@@ -9,7 +9,12 @@ client_{{service.name  }}_ports="default"
 interface {{ ansible_default_ipv4.interface }} internet
   protection strong
   {% for service in services %}
+  {% if service.trusted is defined %}
   server4 {{  service.name  }} accept src {{  service.trusted  }}
+  {% else %}
+  server4 {{  service.name  }} accept
+  {% endif %}
+
   {% endfor %}
   server ssh   accept
   client all   accept
