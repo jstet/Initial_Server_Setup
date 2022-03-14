@@ -12,11 +12,13 @@ Requirements
 
 Role Variables
 --------------
-Use the extra_packages variable to install additional packages
+Use the "extra_packages" variable to install additional packages.
+
 extra_packages:
   - package_name
 
-To allow ports/protocolss through firewall, use the variable services. "trusted" is optional; if undefined all IPs are allowed.
+To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined all IPs are allowed.
+
 services:  
   - name: service_name
     port: port_number

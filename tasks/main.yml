@@ -30,11 +30,6 @@
     line:  "AllowUsers {{  ansible_user_id }}"
     state: present
 
-- name: Restarting ssh
-  service:
-      name: sshd
-      state: restarted
-
 ########################################
 
 - name: Locking root
