@@ -17,4 +17,4 @@ services:
     port: 304
     protocols:
       - tcp
-    trusted: all
+    
