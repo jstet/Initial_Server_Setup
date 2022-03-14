@@ -112,7 +112,7 @@
 - name: modify fail2ban to work with firehol (step 2b --> binding fail2ban to firehol)
   template:
     dest: /etc/systemd/system/fail2ban.service.d/override.conf
-    src: templates/fail2ban/override.conf
+    src: files/fail2ban/override.conf
 
 - name: modify fail2ban to work with firehol (step 3 --> iptable -w switch should be used)
   lineinfile:

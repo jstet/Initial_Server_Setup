@@ -2,8 +2,9 @@
 version 6
 
 {% for service in services %}
-server_{{  service.name  }}_ports="{% for protocol in service.protocols  %}{{  protocol }}/{{  service.port  }}{% endfor %}"
+server_{{  service.name  }}_ports="{% for protocol in service.protocols  %}{{  protocol }}/{{  service.port  }} {% endfor %}"
 client_{{service.name  }}_ports="default"
+
 {% endfor %}
 
 
@@ -13,7 +14,7 @@ interface {{ ansible_default_ipv4.interface }} internet
 {% if service.trusted is defined %}
   server4 {{  service.name  }} accept src {{  service.trusted  }}
 {% else %}
-  server4 {{  service.name  }} accept 
+  server4 {{  service.name  }} accept
 {% endif %}
 {% endfor %}
   server ssh   accept
