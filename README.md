@@ -76,13 +76,3 @@ Another option would be to include the role in requirements.yml and then to run:
 ```
 ansible-galaxy install -r requirements.yml
 ```
-
-License
--------
-
-MIT
-
-Author Information
-------------------
-
-Visit my [homepage](jstet.net)
