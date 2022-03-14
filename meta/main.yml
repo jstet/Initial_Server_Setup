@@ -1,6 +1,6 @@
 galaxy_info:
   author: Jonas Stettner
-  description: Takes care of the usual steps to prepare a server for hosting apps exposed to the public.
+  description: Performs the usual steps to prepare a server for hosting apps exposed to the public.
   company:
 
   license: MIT

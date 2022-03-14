@@ -1,7 +1,7 @@
 Initial_Server_Setup
 =========
 
-This Ansible role takes care of the usual steps to prepare a server for hosting apps exposed to the public.
+This Ansible performs the usual steps to prepare a server for hosting apps exposed to the public.
 
 
 Requirements
