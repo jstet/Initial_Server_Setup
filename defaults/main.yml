@@ -1,5 +1,4 @@
 ---
-
 extra_packages:
   - htop
   - net-tools
