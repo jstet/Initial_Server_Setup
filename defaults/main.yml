@@ -6,7 +6,6 @@ extra_packages:
 
 user: user
 
-
 services:
   - name: testeins
     port: 27017
@@ -16,5 +15,5 @@ services:
     trusted: 212.227.140.227
   - name: testzwei
     port: 304
-    protocol: tcp
+    protocols: tcp
     trusted: 212.227.140.227
