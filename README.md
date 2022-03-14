@@ -8,21 +8,21 @@ Requirements
 ----------------
 - You must be able to log in via ssh as a user that has sudo privileges.
 - Ansible facts must have been gathered.
-- You need to "become" for thr role to work
+- You need to "become" for the role to work
 
 Role Variables
 --------------
 Use the "extra_packages" variable to install additional packages.
 
 Example usage:
-
+```
 extra_packages:
   - package_name
-
+```
 To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined all IPs are allowed.
 
 Example usage:
-
+```
 services:  
   - name: service_name
     port: port_number
@@ -33,9 +33,10 @@ services:
     trusted:
       - IP
       - IP
-
+```
 Example Playbook
 ----------------
+```
 - hosts: all
   gather_facts: yes
   become: no
@@ -63,7 +64,16 @@ Example Playbook
                 - tcp
                 - udp
       become: yes
-
+```
+Installation
+------------------
+```
+ansible-galaxy install jstet.initial_server_setup
+```
+Another option would be to include the role in requirements.yml and then to run:
+```
+ansible-galaxy install -r requirements.yml 
+```
 
 License
 -------
