@@ -4,4 +4,17 @@ extra_packages:
   - htop
   - net-tools
 
-INTERFACE: ens192 #please dont be different for all instances
+user: user
+
+
+services:
+  - name: testeins
+    port: 27017
+    protocols:
+      - tcp
+      - udp
+    trusted: 212.227.140.227
+  - name: testzwei
+    port: 304
+    protocol: tcp
+    trusted: 212.227.140.227

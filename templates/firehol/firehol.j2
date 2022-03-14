@@ -1,10 +1,16 @@
 version 6
 
+{% for service in services %}
+server_{{  service.name  }}_ports="{% for protocol in service.protocols  %}{{  protocol }}/{  service.port  }} "{% endfor %}
+client_{{service.name  }}_ports="default"
+{% endfor %}
 
-interface {{  INTERFACE  }} internet
+
+interface {{ ansible_default_ipv4.interface }} internet
   protection strong
-  server http accept
-  server https accept
+  {% for service in services %}
+  server4 {{  service.name  }} accept src {{  service.trusted  }}
+  {% endfor %}
   server ssh   accept
   client all   accept
 

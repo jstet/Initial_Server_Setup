@@ -1,34 +1,41 @@
 ---
 ####################### SSH hardening #####################
-- name: Disable SSH root login
+- name: Disabling SSH root login
   lineinfile:
     path: /etc/ssh/sshd_config
     line: 'PermitRootLogin no'
     state: present
 
-- name: Disable SSH password authentication
+- name: Disabling SSH password authentication
   lineinfile:
     path: /etc/ssh/sshd_config
     line: 'PasswordAuthentication no'
     state: present
 
-- name:  Disable Empty Passwords
+- name:  Disabling empty Passwords
   lineinfile:
     path: /etc/ssh/sshd_config
     line: 'PermitEmptyPasswords no'
     state: present
 
-- name:  Limit authentication attempts
+- name:  Limiting authentication attempts
   lineinfile:
     path: /etc/ssh/sshd_config
     line: "MaxAuthTries 2"
     state: present
 
-- name: Add a line to a file if the file does not exist
+- name: Allowing only one user to ssh in
   lineinfile:
     path: /etc/ssh/sshd_config
     line:  "AllowUsers {{  user }}"
     state: present
+
+- name: Restarting ssh
+  service:
+      name: sshd
+      state: restarted
+
+########################################
 
 - name: Locking root
   command: passwd --lock root
@@ -86,7 +93,7 @@
     state: started
     enabled: yes
 
-- name:
+- name: Starting firewall
   command: firehol start
 #####Fail2ban#######################
 - name:  modify fail2ban to work with firehol (step 1b --> modify jail.local)
