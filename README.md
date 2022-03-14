@@ -3,7 +3,7 @@ Initial_Server_Setup
 
 This Ansible role performs the usual steps to prepare a server for hosting apps that are exposed to the public.
 
-Find this role on [ansible galaxy](https://galaxy.ansible.com/jstet/initial_server_setup).
+Also find this role on [ansible galaxy](https://galaxy.ansible.com/jstet/initial_server_setup).
 
 
 Requirements
