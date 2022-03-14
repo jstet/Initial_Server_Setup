@@ -12,7 +12,6 @@ interface {{ ansible_default_ipv4.interface }} internet
   protection strong
 {% for service in services %}
 {% if service.trusted is defined %}
-{% for ip in service.trusted %}
   server4 {{  service.name  }} accept src {% for ip in service.trusted %}{{  ip  }} {% endfor %}
 {% else %}
   server4 {{  service.name  }} accept
