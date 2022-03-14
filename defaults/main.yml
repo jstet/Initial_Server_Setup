@@ -4,17 +4,16 @@ extra_packages:
   - htop
   - net-tools
 
-user: user
-
 services:
-  - name: testeins
-    port: 27017
+  - name: http
+    port: 80
     protocols:
       - tcp
       - udp
-    trusted: 212.227.140.227
-  - name: testzwei
-    port: 304
+    trusted:
+      - 216.58.190.0
+  - name: https
+    port: 443
     protocols:
       - tcp
-    
+      - udp

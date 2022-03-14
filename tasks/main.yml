@@ -27,7 +27,7 @@
 - name: Allowing only one user to ssh in
   lineinfile:
     path: /etc/ssh/sshd_config
-    line:  "AllowUsers {{  user }}"
+    line:  "AllowUsers {{  ansible_user_id }}"
     state: present
 
 - name: Restarting ssh
