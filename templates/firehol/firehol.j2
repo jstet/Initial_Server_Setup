@@ -1,22 +1,20 @@
+#jinja2: lstrip_blocks: "True"
 version 6
 
-  {% for service in services %}
-server_{{  service.name  }}_ports="{% for protocol in service.protocols  %}{{  protocol }}/{{  service.port  }} {% endfor %}"
+{% for service in services %}
+server_{{  service.name  }}_ports="{% for protocol in service.protocols  %}{{  protocol }}/{{  service.port  }}{% endfor %}"
 client_{{service.name  }}_ports="default"
-  {% endfor %}
+{% endfor %}
 
 
 interface {{ ansible_default_ipv4.interface }} internet
   protection strong
 {% for service in services %}
-{% if service.trusted is defined %}
-  server4 {{  service.name  }} accept src {{  service.trusted  }}
-{% else %}
+{% if service.trusted == all %}
   server4 {{  service.name  }} accept
+{% else %}
+  server4 {{  service.name  }} accept src {{  service.trusted  }}
 {% endif %}
-
 {% endfor %}
   server ssh   accept
   client all   accept
-
-#https://firehol.org/guides/firehol-welcome/
