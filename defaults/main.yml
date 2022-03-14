@@ -9,8 +9,6 @@ services:
     protocols:
       - tcp
       - udp
-    trusted:
-      - 216.58.190.0
   - name: https
     port: 443
     protocols:

@@ -1,7 +1,7 @@
 Initial_Server_Setup
 =========
 
-This Ansible performs the usual steps to prepare a server for hosting apps exposed to the public.
+This Ansible role performs the usual steps to prepare a server for hosting apps that are exposed to the public.
 
 
 Requirements
@@ -14,10 +14,14 @@ Role Variables
 --------------
 Use the "extra_packages" variable to install additional packages.
 
+Example usage:
+
 extra_packages:
   - package_name
 
 To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined all IPs are allowed.
+
+Example usage:
 
 services:  
   - name: service_name
@@ -30,7 +34,6 @@ services:
       - IP
       - IP
 
-
 Example Playbook
 ----------------
 - hosts: all
@@ -42,6 +45,9 @@ Example Playbook
         include_role:
           name: jstet.initial_server_setup
         vars:
+          extra_packages:
+            - htop
+            - net-tools
           services:
             - name: http
               port: 80
