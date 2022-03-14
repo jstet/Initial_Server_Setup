@@ -1,0 +1,5 @@
+---
+packages:
+  - unattended-upgrades
+  - fail2ban
+  - firehol

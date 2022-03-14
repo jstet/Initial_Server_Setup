@@ -1,0 +1,126 @@
+---
+####################### SSH hardening #####################
+- name: Disable SSH root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: 'PermitRootLogin no'
+    state: present
+
+- name: Disable SSH password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: 'PasswordAuthentication no'
+    state: present
+
+- name:  Disable Empty Passwords
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: 'PermitEmptyPasswords no'
+    state: present
+
+- name:  Limit authentication attempts
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "MaxAuthTries 2"
+    state: present
+
+- name: Add a line to a file if the file does not exist
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line:  "AllowUsers {{  user }}"
+    state: present
+
+- name: Locking root
+  command: passwd --lock root
+
+########################Installing needed and aditionally specified packages###################################
+- name: Update and upgrade apt packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install needed packages
+  package:
+    name: "{{ packages }}"
+    state: present
+
+- name: Install wanted packages
+  package:
+    name: "{{ extra_packages }}"
+    state: present
+
+######Automatic Upgrades#######################
+- name: Copy unattended-upgrades configuration files in place.
+  template:
+    src: "templates/unattended_upgrades/{{ item }}.j2"
+    dest: "/etc/apt/apt.conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 10periodic
+    - 50unattended-upgrades
+
+- name: Ensure unattended upgrades is started and enabled
+  service:
+    name: unattended-upgrades
+    state: started
+    enabled: yes
+#######Firewall#######################
+- name: Replace firehol config
+  template:
+    src: templates/firehol/firehol.j2
+    dest: /etc/firehol/firehol.conf
+
+- name: changing config to start firehol when machine starts
+  lineinfile:
+    path: /etc/default/firehol
+    regexp:  "START_FIREHOL=NO"
+    line: "START_FIREHOL=YES"
+    backrefs: yes
+    state: present
+
+- name: Ensure firehol is started and enabled
+  service:
+    name: firehol
+    state: started
+    enabled: yes
+
+- name:
+  command: firehol start
+#####Fail2ban#######################
+- name:  modify fail2ban to work with firehol (step 1b --> modify jail.local)
+  template:
+    dest: /etc/fail2ban/jail.local
+    src: files/fail2ban/jail.local
+
+- name: modify fail2ban to work with firehol (step 2 --> Create fail2ban.service.d directory)
+  file:
+    path: /etc/systemd/system/fail2ban.service.d/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: modify fail2ban to work with firehol (step 2b --> binding fail2ban to firehol)
+  template:
+    dest: /etc/systemd/system/fail2ban.service.d/override.conf
+    src: templates/fail2ban/override.conf
+
+- name: modify fail2ban to work with firehol (step 3 --> iptable -w switch should be used)
+  lineinfile:
+    dest: /etc/firehol/firehol-defaults.conf
+    line: IPTABLES_CMD="/sbin/iptables -w"
+
+- name: restart systemctl daemon
+  command: systemctl daemon-reload
+
+- name: Ensure fail2ban is started and enabled
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+
+################################################
+- name: Reboot host and wait for it to restart
+  reboot:

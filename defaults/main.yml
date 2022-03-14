@@ -1,0 +1,7 @@
+---
+
+extra_packages:
+  - htop
+  - net-tools
+
+INTERFACE: ens192 #please dont be different for all instances
