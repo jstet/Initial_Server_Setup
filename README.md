@@ -3,7 +3,7 @@ Initial_Server_Setup
 
 This Ansible role performs the usual steps to prepare a server for hosting apps that are exposed to the public.
 
-Also find this role on [ansible galaxy](https://galaxy.ansible.com/jstet/initial_server_setup).
+Also find it on [ansible galaxy](https://galaxy.ansible.com/jstet/initial_server_setup).
 
 
 Requirements
@@ -21,7 +21,7 @@ Example usage:
 extra_packages:
   - package_name
 ```
-To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined all IPs are allowed.
+To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined, all IPs are allowed.
 
 Example usage:
 ```
