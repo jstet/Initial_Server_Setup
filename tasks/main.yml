@@ -18,11 +18,11 @@
     line: 'PermitEmptyPasswords no'
     state: present
 
-- name:  Limiting authentication attempts
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    line: "MaxAuthTries 2"
-    state: present
+#- name:  Limiting authentication attempts
+  #lineinfile:
+    #path: /etc/ssh/sshd_config
+    #line: "MaxAuthTries 3"
+    #state: present
 
 - name: Allowing only one user to ssh in
   lineinfile:
