@@ -30,6 +30,11 @@
     line:  "AllowUsers {{  ansible_user_id }}"
     state: present
 
+########################################
+
+- name: Locking root
+  command: passwd --lock root
+
 ########################Installing needed and aditionally specified packages###################################
 - name: Update and upgrade apt packages
   apt:
