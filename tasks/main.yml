@@ -18,16 +18,16 @@
     line: 'PermitEmptyPasswords no'
     state: present
 
-#- name:  Limiting authentication attempts
-  #lineinfile:
-    #path: /etc/ssh/sshd_config
-    #line: "MaxAuthTries 3"
-    #state: present
+- name:  Limiting authentication attempts
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "MaxAuthTries 3"
+    state: present
 
 - name: Allowing only one user to ssh in
   lineinfile:
     path: /etc/ssh/sshd_config
-    line:  "AllowUsers {{  ansible_user_id }}"
+    line:  "AllowUsers {{  ansible_ssh_user }}"
     state: present
 
 ########################################
