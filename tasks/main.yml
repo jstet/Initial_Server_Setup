@@ -120,7 +120,7 @@
   - name: restart systemctl daemon
     command: systemctl daemon-reload
 
-  when: "'firewall' == true"
+  when: firewall | bool
 
 - name: Ensure fail2ban is started and enabled
   service:
