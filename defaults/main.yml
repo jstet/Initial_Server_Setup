@@ -1,4 +1,6 @@
 ---
+firewall: true
+  
 extra_packages:
   - htop
   - net-tools
