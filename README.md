@@ -21,6 +21,14 @@ Example usage:
 extra_packages:
   - package_name
 ```
+
+The variable "firewall" (defaults to true) allows you to decide if you want a firewall to be set up or not.
+
+Example usage:
+```
+firewall: false
+```
+
 To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined, all IPs are allowed.
 
 Example usage:
