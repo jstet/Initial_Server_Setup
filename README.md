@@ -80,7 +80,12 @@ Installation
 ```
 ansible-galaxy install jstet.initial_server_setup
 ```
-Another option would be to include the role in requirements.yml and then to run:
+Another option would be to include the role in requirements.yml like this:
+```yaml
+roles:
+- jstet.initial_server_setup
+```
+Afterwards run:
 ```
 ansible-galaxy install -r requirements.yml
 ```
