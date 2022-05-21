@@ -29,7 +29,7 @@ Example usage:
 firewall: false
 ```
 
-To allow ports/protocols through firewall, use the variable "services". "trusted" is optional; if undefined, all IPs are allowed. "name" is just for semantical purposes. SSH is allowed by default. All outgoing connections are allowed. See the [firehol config](https://github.com/JStet/Initial_Server_Setup/blob/main/templates/firehol/firehol.j2) for details.
+To allow ports/protocols through firewall, use the variable "services". "trusted" has to be a list (can also only be one item), but is optional; if undefined, all IPs are allowed. "name" is just for semantical purposes. SSH is allowed by default. All outgoing connections are allowed. See the [firehol config](https://github.com/JStet/Initial_Server_Setup/blob/main/templates/firehol/firehol.j2) for details.
 
 Example usage:
 ```
