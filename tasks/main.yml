@@ -72,6 +72,11 @@
 
 - name: Firewall
   block:
+  - name: Install needed packages
+    package:
+      name: firehol
+      state: present
+      
   - name: Replace firehol config
     template:
       src: templates/firehol/firehol.j2
