@@ -136,3 +136,5 @@
 ################################################
 - name: Reboot host and wait for it to restart
   reboot:
+    reboot_timeout: 200
+  ignore_errors: yes
